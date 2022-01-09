@@ -37,8 +37,8 @@ There are serveral ways for increasing the receptive field:
 4) Using transformers, as they use the self attention mechanism which allows each output node to capture the entire receptive field of the input images.
 
 ### FLOPs/MACCs Computation
-I have implemented my own function for computing the FLOPs and MACCs for the convolution (supports Conv2D, DepthwiseConv2D and SeparableConv2D) and fully connected layers.
-FLOPs can be decreased efficiently by applying structured pruning to the trained model, and then fine-tuning for a number of epochs.
+I have implemented my own function for computing the FLOPs and MACCs for the convolution (supports Conv2D, DepthwiseConv2D and SeparableConv2D) and fully connected layers. <br />
+As for decreasing the FLOPs, they can be efficiently decreased by applying structured pruning to the trained model, and then fine-tuning for a number of epochs.
 [Pruning Example](https://pytorch.org/tutorials/intermediate/pruning_tutorial.html)
 ## Results
 
