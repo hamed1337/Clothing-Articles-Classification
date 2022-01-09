@@ -2,6 +2,7 @@
 
 ## Introduction
 In this repository I introduce a clothes classifier that classifies 46 different types of clothes, the classifier is built using tensorflow framework.
+
 ## Dataset
 [DeepFashion](https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html) is a dataset containing around 800K diverse fashion images with their rich annotations (46 categories, 1,000 descriptive attributes, bounding boxes and landmark information) ranging from well-posed product images to real-world-like consumer photos, for this task I used the Category and Attribute Prediction Benchmark subset which contains 289,222 clothes images from 46 different categories.
 
@@ -13,13 +14,13 @@ In this repository I introduce a clothes classifier that classifies 46 different
 4) The image size used is 224x224x3, and batch size is 32.
 
 ### Modeling
-1) I used a pretrained model instead of training a new model from the start, to decrease the training time.
+1) I used a pretrained model instead of training a new model from the start to decrease the training time.
 2) The pretrained model is used as a feature extractor and then I added a dense layer with number of neurons equal to the number of categories in the dataset.
 3) For this task, I tried two small pretrained models (MobileNetv2 and NasNetMobile) to address the problem of size and number of computations.
 
 ### Training
 1) The feature extractor is frozen for 10 epochs where the dense layer is the only trainable layer.
-2) After those 10 epochs the first 2/3 of the layers of the feature extractor are kept frozen (because they contain general features) and the rest of the network is fine-tuned for 10 more epochs and the learning rate is divided by 10 to take small steps.
+2) After those 10 epochs the first 2/3 of the feature extractor are kept frozen (because they contain general features) and the rest of the network is fine-tuned for 10 more epochs and the learning rate is divided by 10 to take small steps.
 
 ### Evaluation
 1) The model is evaluated on the test set, a classification report is generated to show the precision and recall for each class, along with the top-1 and top-5 accuracy.
@@ -97,7 +98,8 @@ After the training the fully connected layer:
     micro avg           0.32      0.32      0.32      2893
     macro avg           0.22      0.28      0.19      2893
     weighted avg        0.56      0.32      0.37      2893
-Top 1 Accuracy: 32%
+    
+Top 1 Accuracy: 32% <br />
 Top 5 Accuracy: 78%
 
 After fine-tuning:
@@ -154,13 +156,13 @@ After fine-tuning:
     macro avg           0.23      0.33      0.25      2893
     weighted avg        0.55      0.46      0.48      2893
 
-Top 1 Accuracy: 46%
+Top 1 Accuracy: 46% <br />
 Top 5 Accuracy: 85%
 #### Receptive field
 #### FLOPs
 
     
-Total MACCs ≈ 306M
+Total MACCs ≈ 306M <br />
 Total FLOPs ≈ 605M 
 ### NasNetMobile
 #### Training Curves
@@ -221,7 +223,7 @@ After the training the fully connected layer:
     macro avg           0.21      0.30      0.19      2893
     weighted avg        0.53      0.31      0.36      2893
 
-Top 1 Accuracy: 31%
+Top 1 Accuracy: 31% <br />
 Top 5 Accuracy: 75%
 
 After fine-tuning:
@@ -239,8 +241,6 @@ MobileNetv2 outperforms NasNetMobile for this application, that may be caused by
 2) Testing more networks such as transformers.
 3) Trying more advanced techniques for data augmentation to mitigate the class imbalance issue.
 
-## Important Note
+## Disclaimer
 This repository is just for demonstration.
-To achieve better results, the whole dataset should be used and the model should be trained for much more epochs.
-
-
+To achieve better results, the whole dataset must be used and the model should be trained for much more epochs.
