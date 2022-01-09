@@ -23,7 +23,7 @@ In this repository I introduce a clothes classifier that classifies 46 different
 2) After those 10 epochs the first 2/3 of the feature extractor are kept frozen (because they contain general features) and the rest of the network is fine-tuned for 10 more epochs and the learning rate is divided by 10 to take small steps.
 
 ### Evaluation
-1) The model is evaluated on the test set, a classification report is generated to show the precision and recall for each class, along with the top-1 and top-5 accuracy.
+1) The model is evaluated on the test set, a classification report is generated to show the precision and recall for each class, along with the top-1 and top-5 accuracy.<br />
 *The top-5 accuracy is used because there are a lot of categories in the dataset and some of them are quite similar.
 
 ### Receptive Field Computation
