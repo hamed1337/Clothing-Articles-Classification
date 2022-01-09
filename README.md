@@ -37,17 +37,19 @@ There are serveral ways for increasing the receptive field:
 
 ### FLOPs/MACCs Computation
 I have implemented my own function for computing the FLOPs and MACCs for the convolution (supports Conv2D, DepthwiseConv2D and SeparableConv2D) and fully connected layers.
+FLOPs can be decreased efficiently by applying structured pruning to the trained model, and then fine-tuning for a number of epochs.
+[Pruning Example](https://pytorch.org/tutorials/intermediate/pruning_tutorial.html)
 ## Results
 
 ### MobileNetv2
 #### Training Curves
-
+![](mobilenet_training.png)
 #### Classification Metrics
 
 After the training the fully connected layer:
 
-                    precision    recall  f1-score   support
-
+       class        precision    recall  f1-score   support
+       
       Anorak            0.00      0.00      0.00         2
       Blazer            0.19      0.47      0.27        73
       Blouse            0.38      0.27      0.31       258
@@ -104,7 +106,8 @@ Top 5 Accuracy: 78%
 
 After fine-tuning:
 
-                    precision    recall  f1-score   support
+       class        precision    recall  f1-score   support
+       
       Anorak            0.00      0.00      0.00         2
       Blazer            0.35      0.45      0.40        73
       Blouse            0.47      0.25      0.33       258
@@ -160,18 +163,34 @@ Top 1 Accuracy: 46% <br />
 Top 5 Accuracy: 85%
 #### Receptive field
 #### FLOPs
+##### Top 10 layers </br>
+	Layer                               FLOPs(M)	MACCs(M)
+	
+    Conv_1	                            40.203520	20.133120
+    block_1_expand	                    39.739392	20.471808
+    block_16_project	                30.121280	15.068480
+    block_3_expand	                    22.127616	11.289600
+    block_2_expand	                    22.127616	11.289600
+    Conv1	                            22.077440	11.239424
+    block_11_expand	                    21.788928	10.950912
+    block_12_expand	                    21.788928	10.950912
+    block_13_expand	                    21.788928	10.950912
+    block_2_project	                    21.751296	10.913280
+* The layer with the highest FLOPs is the last conv layer because it has 1280 kernels.
 
-    
-Total MACCs ≈ 306M <br />
-Total FLOPs ≈ 605M 
+Total FLOPs ≈ 605M <br />   
+Total MACCs ≈ 306M 
+
 ### NasNetMobile
 #### Training Curves
+![](nasnetmobile_training.png)
 #### Classification Metrics
 
 After the training the fully connected layer:
 
-                    precision    recall  f1-score   support
 
+       class        precision    recall  f1-score   support
+       
       Anorak            0.00      0.00      0.00         2
       Blazer            0.30      0.44      0.35        73
       Blouse            0.33      0.14      0.20       258
@@ -228,13 +247,87 @@ Top 5 Accuracy: 75%
 
 After fine-tuning:
 
+       class        precision    recall  f1-score   support
+
+      Anorak            0.00      0.00      0.00         2
+      Blazer            0.33      0.41      0.36        75
+      Blouse            0.43      0.26      0.32       258
+      Bomber            0.00      0.00      0.00         4
+    Button-Down         0.00      0.00      0.00         1
+      Caftan            0.00      0.00      0.00         2
+      Capris            0.00      0.00      0.00         1
+    Cardigan            0.40      0.34      0.37       125
+      Chinos            0.00      0.00      0.00         2
+        Coat            0.47      0.32      0.38        25
+     Coverup            0.00      0.00      0.00         0
+    Culottes            0.40      0.40      0.40         5
+     Cutoffs            0.33      0.25      0.29        16
+       Dress            0.85      0.59      0.69       684
+     Flannel            0.22      0.33      0.27         6
+     Gauchos            0.00      0.00      0.00         0
+      Halter            0.00      0.00      0.00         0
+      Henley            0.25      0.18      0.21        11
+      Hoodie            0.23      0.34      0.28        50
+      Jacket            0.32      0.37      0.34       106
+       Jeans            0.59      0.66      0.62        62
+    Jeggings            0.11      0.25      0.15         4
+      Jersey            0.00      0.00      0.00         5
+    Jodhpurs            0.00      0.00      0.00         0
+     Joggers            0.19      0.24      0.21        41
+    Jumpsuit            0.43      0.63      0.51        51
+      Kaftan            0.00      0.00      0.00         2
+      Kimono            0.09      0.67      0.16        15
+    Leggings            0.60      0.50      0.55        58
+      Onesie            0.00      0.00      0.00         1
+       Parka            0.13      0.33      0.19         6
+     Peacoat            0.00      0.00      0.00         1
+      Poncho            0.43      0.50      0.46         6
+        Robe            0.25      0.33      0.29         3
+      Romper            0.31      0.43      0.36        84
+      Sarong            0.00      0.00      0.00         0
+      Shorts            0.53      0.36      0.43       189
+       Skirt            0.38      0.70      0.49       150
+     Sweater            0.49      0.50      0.49       132
+    Sweatpants          0.37      0.42      0.39        36
+    Sweatshorts         0.10      0.30      0.15        10
+        Tank            0.54      0.49      0.52       189
+         Tee            0.65      0.50      0.57       359
+         Top            0.10      0.20      0.13       109
+      Trunks            0.18      0.50      0.27         4
+    Turtleneck          0.00      0.00      0.00         3
+        
+    micro avg           0.46      0.46      0.46      2893
+    macro avg           0.23      0.27      0.24      2893
+    weighted avg        0.54      0.46      0.48      2893
+
+Top 1 Accuracy: 46% <br />
+Top 5 Accuracy: 85%
 
 
 #### Receptive field
 #### FLOPs
+##### Top 10 layers </br>
+
+	Layer                               FLOPs(M)	MACCs(M)
+	
+    reduction_conv_1_reduce_4	        36.496768	18.282880
+    adjust_conv_projection_reduce_4	    36.496768	18.282880
+    reduction_conv_1_reduce_8	        36.462272	18.248384
+    adjust_conv_projection_reduce_8	    36.462272	18.248384
+    stem_conv1	                        21.684960	11.039616
+    normal_conv_1_1	                    18.248384	9.141440
+    normal_conv_1_3	                    18.248384	9.141440
+    adjust_conv_projection_2	        18.248384	9.141440
+    normal_conv_1_2	18.248384	        9.141440
+    adjust_conv_projection_3	        18.248384	9.141440
+
+Total FLOPs ≈ 1126M <br />
+Total MACCs ≈ 564M 
+
 
 ## Conclusion
-MobileNetv2 outperforms NasNetMobile for this application, that may be caused by the low number of epochs in the training, since NasNetMobile has more layers so it requires extra training steps to converge.
+MobileNetv2 outperforms NasNetMobile for this application, because it has the same accuracy and half the number of FLOPs of NasNetMobile.
+NasNetMobile accuracy may be impacted by the low number of epochs in the training, since NasNetMobile has more layers so it requires extra training steps to converge.
 
 ## Future Work
 1) Training with the whole dataset and for more epochs.
