@@ -28,6 +28,7 @@ In this repository I introduce a clothes classifier that classifies 46 different
 
 ### Receptive Field Computation
 Used an open source [repository](https://github.com/google-research/receptive_field) for computing the receptive field.
+There was an issue in computing the receptive field of MobileNetV2 because of the depthwise conv layers but I found a fix for it in a [closed PR](https://github.com/google-research/receptive_field/pull/11).
 
 There are serveral ways for increasing the receptive field:
 1) Using dilated convolutions which increase the receptive field exponentially. 
@@ -161,21 +162,26 @@ After fine-tuning:
 
 Top 1 Accuracy: 46% <br />
 Top 5 Accuracy: 85%
-#### Receptive field
+#### Receptive Field
+The receptive field is 491x491. each output cell can capture a windows of 491x491.
+##### Increasing the receptive field
+By just adding a single max pooling layer followed by a 3x3 conv layer the receptive field increases from 491x491 to 651x651.
+##### Decreasing the receptive field
+By removing the last 6 blocks of the model the receptive field decreases from 491x491 to 203x203.
 #### FLOPs
 ##### Top 10 layers </br>
-	Layer                                   FLOPs(M)    	MACCs(M)
-	    
-    Conv_1	                                40.203520	    20.133120
-    block_1_expand	                        39.739392	    20.471808
-    block_16_project	                    30.121280	    15.068480
-    block_3_expand	                        22.127616	    11.289600
-    block_2_expand	                        22.127616	    11.289600
-    Conv1	                                22.077440	    11.239424
-    block_11_expand	                        21.788928	    10.950912
-    block_12_expand	                        21.788928	    10.950912
-    block_13_expand	                        21.788928	    10.950912
-    block_2_project	                        21.751296	    10.913280
+	Layer                                           FLOPs(M)    	MACCs(M)
+	            
+    Conv_1	                                        40.203520	    20.133120
+    block_1_expand	                                39.739392	    20.471808
+    block_16_project	                            30.121280	    15.068480
+    block_3_expand	                                22.127616	    11.289600
+    block_2_expand	                                22.127616	    11.289600
+    Conv1	                                        22.077440	    11.239424
+    block_11_expand	                                21.788928	    10.950912
+    block_12_expand	                                21.788928	    10.950912
+    block_13_expand	                                21.788928	    10.950912
+    block_2_project	                                21.751296	    10.913280
 * The layer with the highest FLOPs is the last conv layer because it has 1280 kernels.
 
 Total FLOPs ≈ 605M <br />   
@@ -305,21 +311,23 @@ Top 5 Accuracy: 85%
 
 
 #### Receptive field
+N/A <br />
+This network contains separable convolutions which aren't supported by the receptive field computation framework.
 #### FLOPs
 ##### Top 10 layers </br>
 
-	Layer                                   FLOPs(M)	    MACCs(M)
-	        
-    reduction_conv_1_reduce_4	            36.496768	    18.282880
-    adjust_conv_projection_reduce_4	        36.496768	    18.282880
-    reduction_conv_1_reduce_8	            36.462272	    18.248384
-    adjust_conv_projection_reduce_8	        36.462272	    18.248384
-    stem_conv1	                            21.684960	    11.039616
-    normal_conv_1_1	                        18.248384	    9.141440
-    normal_conv_1_3	                        18.248384	    9.141440
-    adjust_conv_projection_2	            18.248384	    9.141440
-    normal_conv_1_2	                        18.248384	    9.141440
-    adjust_conv_projection_3	            18.248384	    9.141440
+	Layer                                           FLOPs(M)	    MACCs(M)
+	                
+    reduction_conv_1_reduce_4	                    36.496768	    18.282880
+    adjust_conv_projection_reduce_4	                36.496768	    18.282880
+    reduction_conv_1_reduce_8	                    36.462272	    18.248384
+    adjust_conv_projection_reduce_8	                36.462272	    18.248384
+    stem_conv1	                                    21.684960	    11.039616
+    normal_conv_1_1	                                18.248384	    9.141440
+    normal_conv_1_3	                                18.248384	    9.141440
+    adjust_conv_projection_2	                    18.248384	    9.141440
+    normal_conv_1_2	                                18.248384	    9.141440
+    adjust_conv_projection_3	                    18.248384	    9.141440
 
 Total FLOPs ≈ 1126M <br />
 Total MACCs ≈ 564M 
