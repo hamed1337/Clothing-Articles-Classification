@@ -4,6 +4,7 @@
 In this repository I introduce a clothes classifier that classifies 46 different types of clothes, the classifier is built using tensorflow framework.
 
 ## Dataset
+![](categories.jpg)
 [DeepFashion](https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html) is a dataset containing around 800K diverse fashion images with their rich annotations (46 categories, 1,000 descriptive attributes, bounding boxes and landmark information) ranging from well-posed product images to real-world-like consumer photos, for this task I used the Category and Attribute Prediction Benchmark subset which contains 289,222 clothes images from 46 different categories.
 
 ## Approach
