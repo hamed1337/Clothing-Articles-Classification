@@ -183,7 +183,7 @@ Total MACCs ≈ 306M
 
 ### NasNetMobile
 #### Training Curves
-![](nasnetmobile_training.png)
+![](nasnet_training.png)
 #### Classification Metrics
 
 After the training the fully connected layer:
