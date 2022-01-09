@@ -102,7 +102,7 @@ Top 5 Accuracy: 78%
 
 After fine-tuning:
 
-               precision    recall  f1-score   support
+                    precision    recall  f1-score   support
       Anorak            0.00      0.00      0.00         2
       Blazer            0.35      0.45      0.40        73
       Blouse            0.47      0.25      0.33       258
