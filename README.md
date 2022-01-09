@@ -170,18 +170,18 @@ By just adding a single max pooling layer followed by a 3x3 conv layer the recep
 By removing the last 6 blocks of the model the receptive field decreases from 491x491 to 203x203.
 #### FLOPs
 ##### Top 10 layers </br>
-	Layer                                                   		FLOPs(M)    	    		MACCs(M)
-						
-	Conv_1	                                                		40.203520	        	20.133120
-	block_1_expand	                                        		39.739392	        	20.471808
-	block_16_project	                                		30.121280	        	15.068480
-	block_3_expand	                                        		22.127616	        	11.289600
-	block_2_expand	                                        		22.127616	        	11.289600
-	Conv1	                                                		22.077440	        	11.239424
-	block_11_expand	                                        		21.788928	        	10.950912
-	block_12_expand	                                        		21.788928	        	10.950912
-	block_13_expand	                                        		21.788928	        	10.950912
-	block_2_project	                                        		21.751296	        	10.913280
+	Layer                                                   FLOPs(M)    	    		MACCs(M)
+				
+	Conv_1	                                                40.203520	        	20.133120
+	block_1_expand	                                        39.739392	        	20.471808
+	block_16_project	                                30.121280	        	15.068480
+	block_3_expand	                                        22.127616	        	11.289600
+	block_2_expand	                                        22.127616	        	11.289600
+	Conv1	                                                22.077440	        	11.239424
+	block_11_expand	                                        21.788928	        	10.950912
+	block_12_expand	                                        21.788928	        	10.950912
+	block_13_expand	                                        21.788928	        	10.950912
+	block_2_project	                                        21.751296	        	10.913280
 * The layer with the highest FLOPs is the last conv layer because it has 1280 kernels.
 
 Total FLOPs ≈ 605M <br />   
@@ -316,18 +316,18 @@ This network contains separable convolutions which aren't supported by the recep
 #### FLOPs
 ##### Top 10 layers </br>
 
-	Layer                                            		     	FLOPs(M)	        	MACCs(M)
+	Layer                                            	FLOPs(M)	        	MACCs(M)
 	                           		    
-	reduction_conv_1_reduce_4	                            		36.496768	            	18.282880
-	adjust_conv_projection_reduce_4	                        	     	36.496768	        	18.282880
- 	reduction_conv_1_reduce_8	                            		36.462272	        	18.248384
- 	adjust_conv_projection_reduce_8	                       		    	36.462272	        	18.248384
- 	stem_conv1	                                           		21.684960	        	11.039616
- 	normal_conv_1_1	                                       		    	18.248384	        	9.141440
- 	normal_conv_1_3	                                       		    	18.248384	        	9.141440
- 	adjust_conv_projection_2	                           		18.248384	        	9.141440
- 	normal_conv_1_2	                                       		    	18.248384	        	9.141440
- 	adjust_conv_projection_3	                            		18.248384	        	9.141440
+	reduction_conv_1_reduce_4	                        36.496768	            	18.282880
+	adjust_conv_projection_reduce_4	                       	36.496768	        	18.282880
+ 	reduction_conv_1_reduce_8	                       	36.462272	        	18.248384
+ 	adjust_conv_projection_reduce_8	                       	36.462272	        	18.248384
+ 	stem_conv1	                                        21.684960	        	11.039616
+ 	normal_conv_1_1	                                       	18.248384	        	9.141440
+ 	normal_conv_1_3	                                       	18.248384	        	9.141440
+ 	adjust_conv_projection_2	                        18.248384	        	9.141440
+ 	normal_conv_1_2	                                       	18.248384	        	9.141440
+ 	adjust_conv_projection_3	                        18.248384	        	9.141440
     
 Total FLOPs ≈ 1126M <br />
 Total MACCs ≈ 564M 
