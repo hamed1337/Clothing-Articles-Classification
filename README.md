@@ -342,6 +342,7 @@ NasNetMobile accuracy may be impacted by the low number of epochs in the trainin
 1) Training with the whole dataset and for more epochs.
 2) Testing more networks such as transformers.
 3) Trying more advanced techniques for data augmentation to mitigate the class imbalance issue.
+4) Using learning rate scheduler to optimize the training process.
 
 ## Disclaimer
 This repository is just for demonstration.
